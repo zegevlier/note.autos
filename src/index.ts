@@ -92,6 +92,18 @@ app.get("/robots.txt", async (c) => {
   return c.text("User-agent: *\nAllow: /$\nDisallow: /");
 });
 
+app.get("sitemap.xml", async (c) => {
+  return c.body(`<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+<loc>https://note.autos</loc>
+<lastmod>2022-05-16</lastmod>
+</url>
+</urlset>`, 200, {
+    "Content-Type": "application/xml"
+  })
+});
+
 app.get("/:id", async (c) => {
   const id = c.req.param('id');
   const note = await c.env.notes.get(id);
