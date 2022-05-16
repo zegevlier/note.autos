@@ -8,16 +8,22 @@ declare module 'hono' {
 }
 
 const html_data = `
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <title>Notes</title>
   <style>
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
     #note {
       width:100%;
       height:100%;
       resize:none;
       margin:0;
       border:0;
-      padding:7;
+      padding:7px;
       outline: none;
     }
     @media (prefers-color-scheme: dark) {
@@ -31,6 +37,8 @@ const html_data = `
   <meta property="og:type" content="website" />
   <meta property="og:url" content="http://note.autos" />
   <meta property="og:description" content="Quick, hyper-minimal note sharing site" />
+  <meta name="description" content="Quick, hyper-minimal note sharing site">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <script>
     function save() {
       const note = document.getElementById("note").value;
@@ -58,12 +66,17 @@ const html_data = `
 </head>
 <body style="margin:0;">
   <textarea id="note" autofocus placeholder="Press ctrl-s to save"></textarea>
-</body>`
+</body>
+</html>`
 
 const app = new Hono();
 
 app.get("/", async (c) => {
   return c.html(html_data);
+});
+
+app.get("/robots.txt", async (c) => {
+  return c.text("User-agent: *\nAllow: /$\nDisallow: /");
 });
 
 app.get("/:id", async (c) => {
