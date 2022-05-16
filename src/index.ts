@@ -7,10 +7,7 @@ declare module 'hono' {
   }
 }
 
-const app = new Hono();
-
-app.get("/", async (c) => {
-  return c.html(`
+const html_data = `
 <head>
   <title>Notes</title>
   <style>
@@ -19,17 +16,20 @@ app.get("/", async (c) => {
       height:100%;
       resize:none;
       margin:0;
+      border:0;
+      padding:7;
+      outline: none;
     }
     @media (prefers-color-scheme: dark) {
       #note {
-        background-color: #333;
+        background-color: #2f3136;
         color: #eee;
       }
     }
   </style>
   <meta property="og:title" content="note.autos" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="http://my.site.com" />
+  <meta property="og:url" content="http://note.autos" />
   <meta property="og:description" content="Quick, hyper-minimal note sharing site" />
   <script>
     function save() {
@@ -56,9 +56,14 @@ app.get("/", async (c) => {
     });
   </script>
 </head>
-<body style="padding:0;margin:0;">
-  <textarea id="note" rows="20" cols="80" maxlength="10000" autofocus></textarea>
-</body>`);
+<body style="margin:0;">
+  <textarea id="note" autofocus></textarea>
+</body>`
+
+const app = new Hono();
+
+app.get("/", async (c) => {
+  return c.html(html_data);
 });
 
 app.get("/:id", async (c) => {
