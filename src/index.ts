@@ -57,7 +57,7 @@ const html_data = `
   </script>
 </head>
 <body style="margin:0;">
-  <textarea id="note" autofocus></textarea>
+  <textarea id="note" autofocus placeholder="Press ctrl-s to save"></textarea>
 </body>`
 
 const app = new Hono();
