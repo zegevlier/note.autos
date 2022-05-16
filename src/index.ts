@@ -62,6 +62,19 @@ const html_data = `
         save();
       }
     });
+    window.addEventListener("touchstart", tapHandler);
+
+    var tapedTwice = false;
+
+    function tapHandler(event) {
+        if(!tapedTwice) {
+            tapedTwice = true;
+            setTimeout( function() { tapedTwice = false; }, 300 );
+            return false;
+        }
+        event.preventDefault();
+        save();
+    }
   </script>
 </head>
 <body style="margin:0;">
