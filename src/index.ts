@@ -51,7 +51,10 @@ const html_data = `
           if (navigator.clipboard) {
             navigator.clipboard.writeText(location.origin + "/" + id);
           }
-          window.location.href = "/" + id;
+          // after 100ms, redirect
+          setTimeout(() => {
+            window.location.href = "/" + id;
+          }, 100);
         });
       });
     }
@@ -78,7 +81,7 @@ const html_data = `
   </script>
 </head>
 <body style="margin:0;">
-  <textarea id="note" autofocus placeholder="Press ctrl-s to save"></textarea>
+  <textarea id="note" autofocus placeholder="Press ctrl-s or double-tap to save"></textarea>
 </body>
 </html>`
 
@@ -110,7 +113,7 @@ app.get("/:id", async (c) => {
   if (note) {
     return c.text(note);
   }
-  return c.redirect("/");
+  return c.text("Not found", 404);
 });
 
 app.post("/save", async (c) => {
