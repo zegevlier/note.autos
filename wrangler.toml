@@ -1,0 +1,7 @@
+compatibility_date = "2022-05-16"
+main = "src/index.ts"
+name = "note-autos"
+
+kv_namespaces = [
+  {binding = "notes", id = "8a57213276514190924c7bb0150a3695", preview_id = "092ad66c3dff4c3bb4800afd8ba65a79"},
+]
