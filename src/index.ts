@@ -27,6 +27,10 @@ app.get("/", async (c) => {
       }
     }
   </style>
+  <meta property="og:title" content="note.autos" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="http://my.site.com" />
+  <meta property="og:description" content="Quick, hyper-minimal note sharing site" />
   <script>
     function save() {
       const note = document.getElementById("note").value;
